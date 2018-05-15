@@ -8,6 +8,7 @@ pipeline:
       - tar cvfj ArchLinuxARM.tar.xz -C rootfs .        # You have to thank Docker Symlinks for this ...
       - rm ArchLinuxARM.tar.gz
       - docker build --rm -t pixelclinux/arch-linux:latest .
+      - docker export pixelclinux/arch-linux:latest > pixelc-arch.tar
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
         #  build:

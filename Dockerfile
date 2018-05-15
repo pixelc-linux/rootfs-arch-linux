@@ -32,7 +32,7 @@ RUN systemctl enable dhcpcd
 RUN sed -i 's/#keyboard=/keyboard=onboard/' /etc/lightdm/lightdm-gtk-greeter.conf
 RUN mkdir -p /etc/NetworkManager/system-connection/
 COPY conf/networkmanager/connection/1.conf /etc/NetworkManager/system-connection/wifi-conn-1
-COPY conf/systemd/services/btkbd.conf /etc/systemd/system/btkbd.service
+COPY conf/systemd/services/btkbd.service /etc/systemd/system/btkbd.service
 RUN systemctl enable btkbd
 
 # Add BRMC 4353 Firmware
