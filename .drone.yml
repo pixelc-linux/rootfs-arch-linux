@@ -11,9 +11,9 @@ pipeline:
       - docker export pixelclinux/arch-linux:latest > pixelc-arch.tar
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    github_release:
-      image: plugins/github-release
-      secrets: [ github_token ]
-      files: out/pixelc-arch.tar
-      when:
-        event: tag
+  github_release:
+    image: plugins/github-release
+    secrets: [ github_token ]
+    files: pixelc-arch.tar
+    when:
+      event: tag
