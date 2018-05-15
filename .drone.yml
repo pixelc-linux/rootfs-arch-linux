@@ -1,0 +1,15 @@
+pipeline:
+  setup:
+    image: docker
+    commands:
+      - mkdir rootfs
+      - wget 'http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz' -O ArchLinuxARM.tar.gz
+      - tar -xvf ArchLinuxARM.tar.gz -C rootfs/
+      - tar cvfj ArchLinuxARM.tar.xz -C rootfs .        # You have to thank Docker Symlinks for this ...
+      - rm ArchLinuxARM.tar.gz
+      - docker build --rm -t pixelclinux/arch-linux:latest .
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+        #  build:
+        #    image: /bar:baz
+        #    commands:

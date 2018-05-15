@@ -1,0 +1,11 @@
+[Unit]
+Description=systemd Unit to automatically start a Bluetooth keyboard
+Documentation=https://wiki.archlinux.org/index.php/Bluetooth_Keyboard
+ConditionPathExists=/etc/btkbd.conf
+ConditionPathExists=/usr/bin/bluetoothctl
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/btkbd.conf
+ExecStart=/usr/bin/bluetoothctl connect ${BTKBDMAC}
+[Install]
+WantedBy=bluetooth.target
