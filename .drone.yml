@@ -8,12 +8,17 @@ pipeline:
       - tar cfj ArchLinuxARM.tar.xz -C rootfs .     # You have to thank Docker Symlinks for this ...
       - rm ArchLinuxARM.tar.gz
       - docker build --rm -t pixelclinux/arch-linux:latest .
-      - docker export pixelclinux/arch-linux:latest > pixelc-arch.tar
+      - docker save -o pixelc-arch.tar pixelclinux/arch-linux:latest
+      - mkdir docker-layers
+      - mkdir docker-rootfs
+      - tar -xvf pixelc-arch.tar -C docker-layers
+      - for i in docker-layers/**/layer.tar; do tar -xvf -C docker-rootfs/; done
+      - tar -cfj pixelc-arch.tar.xz docker-rootfs
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   github_release:
     image: plugins/github-release
     secrets: [ github_token ]
-    files: pixelc-arch.tar
+    files: pixelc-arch.tar.xz
     when:
       event: tag

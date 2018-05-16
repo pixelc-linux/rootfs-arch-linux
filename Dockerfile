@@ -33,7 +33,5 @@ RUN sed -i 's/#keyboard=/keyboard=onboard/' /etc/lightdm/lightdm-gtk-greeter.con
 RUN mkdir -p /etc/NetworkManager/system-connection/
 COPY conf/networkmanager/connection/1.conf /etc/NetworkManager/system-connection/wifi-conn-1
 COPY conf/systemd/services/btkbd.service /etc/systemd/system/btkbd.service
+COPY conf/alarm/xinitrc /home/alarm/.xinitrc
 RUN systemctl enable btkbd
-
-# Add BRMC 4353 Firmware
-COPY "https://github.com/denysvitali/linux-smaug/blob/v4.17-rc3/firmware/bcm4354.hcd?raw=true" /lib/firmware/brcm/BCM4354.hcd
