@@ -1,3 +1,6 @@
 *.tar.gz
 *.tar.xz
 rootfs/
+docker-layers/
+docker-rootfs/
+pixelc-arch.tar
